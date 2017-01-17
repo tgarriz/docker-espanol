@@ -15,6 +15,14 @@
 
 La instalación puede seguirse desde la [Documentación Oficial](https://docs.docker.com/engine/installation/).
 
+## Ejecutando Docker como un usuario normal
+
+El demonio docker cuando se inicia siempre se ejecuta como root. Para solucionar esto podemos añadir nuestro usuario sin privilegio al grupo docker.
+
+```
+  $ usermod -a -G docker usuario
+```
+
 ## Empezando
 
 ### `images`
