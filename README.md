@@ -22,7 +22,37 @@ El demonio docker cuando se inicia siempre se ejecuta como root. Para solucionar
 ```
   $ usermod -a -G docker usuario
 ```
+## Acceder a docker engine desde otra máquina
 
+```
+$ nano /etc/systemd/system/multi-user.target.wants/docker.service
+```
+Buscamos la linea 
+
+### `ExecStart=/usr/bin/dockerd -H fd://`
+
+y reemplazamos por 
+
+### ` ExecStart=/usr/bin/docker daemon -H fd:// -H tcp://0.0.0.0:2376 `
+
+Luego reiniciamos
+ 
+```
+systemctl daemon-reload
+service docker restart
+
+```
+Instalamos el cliente de docker en una maquina cliente
+```
+# apt-get install docker.io
+
+```
+Para luego conectarnos por consola
+
+```
+docker -H 192.168.0.207:2376 images
+
+```
 ## Empezando
 
 ### `images`
